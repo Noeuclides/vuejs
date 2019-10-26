@@ -1,0 +1,70 @@
+<template>
+<div class="test">
+<div> {{ msg }} </div>
+<div v-html="myhtml"></div>
+<div v-html="title"></div>
+<div v-if="showName">
+   <p>{{ user.firstName}}</p>
+</div>
+<div v-else>
+<p>CAN'T</p>
+</div>
+<hr>
+<ul>
+<li v-for="t in tasks">
+{{t.title}}
+</li>
+</ul>
+<input type="text" v-model="user.firstName">
+<button type="button" v-on:click="hi(user.firstName)">
+CLICK ME
+</button>
+<hr>
+<input type="text" v-on:keyup.enter="typing">
+</div>
+</template>
+
+<script>
+export default {
+  data() {
+   return {
+     title: 'Hola Vuejs',
+     user: {
+       firstName: 'Joe',
+       lastName: 'asfa',
+     },
+    myhtml: '<h2>hola vue</h2>',
+    showName: false,
+    tasks: [
+     {title: 'eat'},
+     {title: 'dinner'}
+    ]
+   }
+  },
+  methods: {
+   hi(name) {
+     alert('HELLO HERE ' + name)
+   },
+   typing(e) {
+     console.log(e.target.value);
+   }
+  },
+  computed: {
+    fullName() {
+      return this.user.firstName + ' ' + this.user.lastName
+    }
+  },
+  props: {
+    msg: {
+      type: String,
+      default: "DEFAULT"
+    }
+  }
+}
+</script>
+
+<style media="screen">
+  .test {
+    background-color: #000000;
+  }
+</style>
